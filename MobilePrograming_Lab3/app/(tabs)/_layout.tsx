@@ -8,6 +8,7 @@ import TabBarBackground from "@/components/ui/TabBarBackground";
 import { Colors } from "@/constants/Colors";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { Icon } from "react-native-paper";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -43,6 +44,24 @@ export default function TabLayout() {
           title: "Products",
           tabBarIcon: ({ color }) => (
             <MaterialIcons name="inventory" size={28} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="add"
+        options={{
+          title: "Add",
+          tabBarIcon: ({ color }) => (
+            <Icon size={30} color={color} source="bomb" />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color }) => (
+            <Icon size={30} color={color} source="archive-search" />
           ),
         }}
       />

@@ -15,7 +15,9 @@ const ProductLayout = () => {
         name="[id]"
         options={{
           headerShown: true,
+          headerBackVisible: true,
           title: "Details",
+          statusBarHidden: false,
         }}
       />
     </Stack>

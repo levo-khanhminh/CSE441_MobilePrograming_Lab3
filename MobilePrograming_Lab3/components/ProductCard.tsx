@@ -38,8 +38,8 @@ const ProductCard = ({
         <Image style={styles.image} source={{ uri: images[0] }} />
       </View>
       <View style={styles.productInfoContainer}>
-        <Text style={{ fontWeight: "bold", fontSize: 20 }}>{title}</Text>
-        <Text style={{ fontSize: 13 }}>{description}</Text>
+        <Text style={{ fontWeight: "bold", fontSize: 16 }}>{title}</Text>
+        <Text style={{ fontSize: 13 }}>{description.substring(0, 25)}</Text>
         <Text style={{ color: "red" }}>Price:{price}</Text>
         <Text style={{ color: "green" }}>
           Discount : {discountPercentage || "Discount"} off
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     marginVertical: 10,
     flexDirection: "row",
-    columnGap: 10,
+    columnGap: 3,
   },
   button: {
     fontSize: 15,

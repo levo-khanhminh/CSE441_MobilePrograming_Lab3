@@ -16,17 +16,22 @@ const ProductList = () => {
       .catch((err) => console.log(err));
   }, []);
   function handleDeleteProduct(id: number) {
+    // There is a big bug when  A New Product is created with a new Id from this fake API , the id may or may not exist in the list
+    // In case  not exists the id of product  from the API,it returns Not Found(404),
+    //  So just delete product with given id  from the list  of products after fetching them the API in the Client Side - Not the Server One.
     fetch("https://dummyjson.com/products/" + id, {
       method: "DELETE",
     })
       .then((res) => {
         console.log(res);
+        console.log("Delete response : ", res.status);
         if (res.status === 200) {
           console.log("Successfully delete product");
-          setData(data.filter((item) => item.id !== id));
         } else {
           console.log(res.status);
         }
+        // Change code here
+        setData(data.filter((item) => item.id !== id));
       })
       .catch((err) => {
         console.log(err);
@@ -34,19 +39,24 @@ const ProductList = () => {
   }
   function handleAddProduct(product: ProductProps) {
     console.log(product.id);
+    const newProduct = {
+      title: product.title,
+      price: product.price,
+      category: product.category,
+      brand: product.category,
+      images: product.images,
+      discountPercentage: product.discountPercentage,
+      rating: product.rating,
+      stock: product.stock,
+      description: product.description,
+    };
     fetch("https://dummyjson.com/products/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(product),
+      body: JSON.stringify(newProduct),
     })
-      .then((res) => {
-        if (res.status === 201) {
-          console.log("Successfullt add product");
-          setData([...data, product]);
-        } else {
-          console.log(res.status);
-        }
-      })
+      .then((res) => res.json())
+      .then((d) => setData([...data, d]))
       .catch((err) => console.log(err));
   }
   function handleDisplayProductDetail(id: number) {
